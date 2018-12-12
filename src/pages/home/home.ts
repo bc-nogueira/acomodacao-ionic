@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  openListAcomodacoes() {
+    this.navCtrl.push('AcomodacoesListPage');
+  }
+
 }

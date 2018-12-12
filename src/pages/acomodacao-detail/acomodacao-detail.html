@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Acomodação</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div text-center>
+      <h1>{{ acomodacao.titulo }}</h1>
+      <h4>{{ tipoEmTexto(acomodacao.tipo) }}</h4>
+      <ion-grid>
+        <ion-row justify-content-between>
+          <ion-icon name="people">  {{ acomodacao.capacidade }}</ion-icon>
+          <ion-icon name="logo-usd">  {{ acomodacao.preco }}</ion-icon>
+        </ion-row>
+        <ion-row margin-top>
+          <span><b>Logradouro: </b>{{ acomodacao.logradouro }}</span>
+        </ion-row>
+        <ion-row margin-top justify-content-between>
+          <span><b>Número: </b>{{ acomodacao.numero }}</span>
+          <span><b>Complemento: </b>{{ acomodacao.complemento }}</span>
+        </ion-row>
+        <ion-row margin-top justify-content-between>
+          <span><b>Bairro: </b>{{ acomodacao.bairro }}</span>
+          <span><b>Cidade: </b>{{ acomodacao.cidade }}</span>
+        </ion-row>
+        <ion-row margin-top>
+            <span><b>Estado: </b>{{ acomodacao.estado }}</span>
+        </ion-row>
+        <div margin-top text-left>
+            <b>Descrição: </b>
+            <p>{{ acomodacao.descricao }}</p>
+        </div>
+      </ion-grid>
+    </div>
+    
+    <ion-list [virtualScroll]="urls">
+      <ion-item *virtualItem="let url">
+            <img width="200" height="400" [src]="url" />
+      </ion-item>
+    </ion-list>
+</ion-content>

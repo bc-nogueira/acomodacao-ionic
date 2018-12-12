@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Acomodações</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+      <ion-item-sliding *ngFor="let acomodacao of acomodacoes">
+        <ion-item (click)="openAcomodacao(acomodacao.id)">
+          <ion-grid>
+            <ion-row justify-content-center>
+                <h1>{{ acomodacao.titulo }}</h1>
+            </ion-row>
+            <ion-row justify-content-between margin-top>
+                <ion-icon name="people">  {{ acomodacao.capacidade }}</ion-icon>
+                <ion-icon name="logo-usd">  {{ acomodacao.preco }}</ion-icon>
+            </ion-row>
+            <ion-row justify-content-between margin-top>
+                <span>{{ acomodacao.cidade }}</span>
+                <span>{{ acomodacao.estado }}</span>
+            </ion-row>
+            <button ion-button>Visualizar</button>
+        </ion-grid>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+
+    <!-- <ion-infinite-scroll (ionInfinite)="getAcomodacoes($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Aguarde...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
+</ion-content>
