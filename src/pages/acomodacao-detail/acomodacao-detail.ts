@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 declare var google;
 
@@ -16,10 +16,14 @@ export class AcomodacaoDetailPage {
   map: any;
   acomodacaoPosition: any;
   currentPosition: string;
+  duracaoGet: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+      private toast: ToastController) {
     this.acomodacao = this.navParams.data.dadosAcomodacao.acomodacao;
+    this.duracaoGet = this.navParams.data.duracaoGet;
     this.urls = this.navParams.data.dadosAcomodacao.urls;
+    this.toast.create({ message: this.duracaoGet + "ms" }).present();
     this.posicaoAtual();
   }
 

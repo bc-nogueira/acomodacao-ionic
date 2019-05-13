@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import moment from 'moment';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,9 @@ export class HomePage {
   }
 
   openListAcomodacoes() {
-    this.navCtrl.push('AcomodacoesListPage');
+    this.navCtrl.push('AcomodacoesListPage', {
+      inicioCarregamento: moment().valueOf()
+    });
   }
 
 }

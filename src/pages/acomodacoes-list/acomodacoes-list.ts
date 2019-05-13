@@ -1,6 +1,7 @@
 import { AcomodacoesProvider } from './../../providers/acomodacoes/acomodacoes';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, InfiniteScroll, ToastController } from 'ionic-angular';
+import moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -9,10 +10,14 @@ import { IonicPage, NavController, NavParams, InfiniteScroll, ToastController } 
 })
 export class AcomodacoesListPage {
   acomodacoes: any[];
+  inicioCarregamento: number;
+
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, 
-              private acomodacoesProvider: AcomodacoesProvider) { }
+              private acomodacoesProvider: AcomodacoesProvider) {
+    this.inicioCarregamento = navParams.data.inicioCarregamento;
+  }
 
   ionViewDidLoad() {
     this.acomodacoes = [];
@@ -34,6 +39,8 @@ export class AcomodacoesListPage {
             this.infiniteScroll.enable(false);
           }
         }
+
+        this.toast.create({ message: moment().valueOf() - this.inicioCarregamento + "ms" }).present();
       })
       .catch((error: any) => {
         this.toast.create({ message: 'Erro ao listar as acomodações. Erro: ' + error, position: 'botton', duration: 3000 }).present();
@@ -47,9 +54,13 @@ export class AcomodacoesListPage {
   // }
 
   openAcomodacao(id: number) {
+    let inicioGet = moment().valueOf();
     this.acomodacoesProvider.get(id)
       .then((result: any) => {
-        this.navCtrl.push('AcomodacaoDetailPage', { dadosAcomodacao: result });
+        this.navCtrl.push('AcomodacaoDetailPage', { 
+          dadosAcomodacao: result,
+          duracaoGet: moment().valueOf() - inicioGet
+        });
       })
       .catch((error: any) => {
         this.toast.create({ message: 'Erro ao recuperar a acomodação. Erro: ' + error.error, position: 'botton', duration: 3000 }).present();
